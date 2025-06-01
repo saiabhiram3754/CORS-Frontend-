@@ -15,6 +15,9 @@ import LawRoadmap from './pages/LawRoadmap';
 import RndRoadmap from './pages/RndRoadmap';
 import BusinessAndManagementRoadmap from './pages/BusinessAndManagementRoadmap';
 import CareerRecommendation from './components/CareerRecommendation';
+import EducationAndTeachingRoadmap from './pages/EducationAndTeachingRoadmap';
+import Blog from './pages/Blog';
+
 
 const App = () => (
   <Router>
@@ -25,6 +28,7 @@ const App = () => (
       <Route path="/engineering-roadmap" element={<EngineeringRoadmap />} />
       <Route path="/healthcare-roadmap" element={<HealthcareRoadmap />} />
       <Route path="/Govt-roadmap" element={<GovernmentRoadmap />} />
+      <Route path="/Edu-roadmap" element={<EducationAndTeachingRoadmap />} />
       <Route path="/Law-roadmap" element={<LawRoadmap/>} />
       <Route path="/rnd-roadmap" element={<RndRoadmap/>} />
       <Route path="/Finance-roadmap" element={<FinanceRoadmap />} />
@@ -35,7 +39,7 @@ const App = () => (
       <Route path="/govt-roles" element={<GovtRolesPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/recommend" element={<CareerRecommendation />} />
-      
+      <Route path="/blog" element={<Blog />} />
     </Routes>
   </Router>
 );

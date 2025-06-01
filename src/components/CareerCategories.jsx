@@ -19,7 +19,7 @@ const categories = [
   { title: 'Finance & Banking', icon: <FaMoneyCheckAlt />, path: '/Finance-roadmap' },
   { title: 'Arts & Design', icon: <FaPaintBrush />, path: '/arts-roadmap' },
   { title: 'Government & Public Service', icon: <FaUniversity />, path: '/Govt-roadmap' },
-  { title: 'Education & Teaching', icon: <FaChalkboardTeacher />, path: '/category/education' },
+  { title: 'Education & Teaching', icon: <FaChalkboardTeacher />, path: '/Edu-roadmap' },
   { title: 'Business & Management', icon: <FaBriefcase />, path: '/business-roadmap' },
   { title: 'Research & Development', icon: <FaFlask />, path: '/rnd-roadmap' },
   { title: 'Law & Legal Services', icon: <FaBalanceScale />, path: '/Law-roadmap' }

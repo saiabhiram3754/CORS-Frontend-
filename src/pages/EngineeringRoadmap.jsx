@@ -7,60 +7,57 @@ import ResourcesAccordion from "../components/engg/ResourcesAccordion";
 
 const roadmapSteps = [
   {
-    title: "After 10th Grade",
-    description: "Choose Science stream (PCM/PCMB) or Polytechnic Diploma based on interest."
+    title: "Path 1: After 10th Grade (Intermediate)",
+    description:
+      "Choose the Science stream (PCM/PCMB). Prepare for entrance exams like JEE Main, JEE Advanced, or state CET. Apply for B.Tech/B.E programs based on your score."
   },
   {
-    title: "After 12th Grade",
-    description: "Prepare for JEE, CET, or other exams. Enroll in B.Tech/B.E."
+    title: "Path 2: After 10th Grade (Diploma Route)",
+    description:
+      "Enroll in a 3-year Polytechnic Diploma in your chosen engineering field. After completion, appear for lateral entry exams to join 2nd year of B.Tech/B.E."
   },
   {
-    title: "During College",
-    description: "Focus on core subjects, internships, and certifications."
+    title: "During Engineering (B.Tech/B.E)",
+    description:
+      "Focus on your major subjects, complete internships, work on academic and personal projects, and pursue certifications in relevant areas (NPTEL, Coursera, etc.)."
   },
   {
     title: "After Graduation",
-    description: "Get a job, appear for GATE, GRE, or pursue higher education."
+    description:
+      "Choose between job placement, GATE for M.Tech/PSUs, GRE for MS abroad, or CAT for MBA. Public sector exams like ISRO, DRDO, or state engineering services are also good options."
+  },
+  {
+    title: "Higher Education or Employment",
+    description:
+      "Pursue advanced degrees, specialize in emerging tech, join startups or MNCs, or contribute to R&D. Networking and continuous learning are key to long-term success."
   }
 ];
 
 const branches = [
-  {
-    name: "Computer Science",
-    description: "Programming, AI, Data Structures",
-    image: "/images/computer-science.png"
-  },
-  {
-    name: "Mechanical",
-    description: "Thermodynamics, CAD, Manufacturing",
-    image: "/images/mechanical.png"
-  },
-  {
-    name: "Civil",
-    description: "Site Planning, Structural Design",
-    image: "/images/electrical.png"
-  },
-  {
-    name: "Electrical",
-    description: "Circuits, Power Systems",
-    image: "/images/civil.png"
-  },
-  {
-    name: "Electronics",
-    description: "IoT, Embedded Systems",
-    image: "/images/electronics.png"
-  }
+  { name: "Computer Science", description: "Programming, AI, Data Structures", image: "/images/computer-science.png" },
+  { name: "Mechanical Engineering", description: "Thermodynamics, CAD, Manufacturing", image: "/images/mechanical.png" },
+  { name: "Civil Engineering", description: "Construction, Structural Design", image: "/images/civil.png" },
+  { name: "Electrical Engineering", description: "Circuits, Power Systems, Machines", image: "/images/electrical.png" },
+  { name: "Electronics & Communication", description: "IoT, Embedded Systems, VLSI", image: "/images/electronics.png" },
+  { name: "Chemical Engineering", description: "Process Engineering, Petrochemicals", image: "/images/chemical.png" },
+  { name: "Biotechnology", description: "Bioengineering, Genetic Research", image: "/images/biotechnology.png" },
+  { name: "Aerospace Engineering", description: "Aircraft Design, Aerodynamics", image: "/images/aerospace.png" },
+  { name: "Environmental Engineering", description: "Sustainability, Water Resources", image: "/images/environment.png" }
 ];
 
 export default function EngineeringRoadmap() {
   return (
     <div className="p-4 space-y-10 max-w-6xl mx-auto">
-      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-4xl font-bold text-center text-blue-600">
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-4xl font-bold text-center text-blue-600"
+      >
         Engineering Career Roadmap
       </motion.h1>
 
       <section className="text-lg text-gray-700 text-center">
-        Explore your journey from high school to a successful engineering career. This guide includes branches, courses, and job roles.
+        Explore your journey from 10th grade to a successful career in engineering. This roadmap includes separate paths for Intermediate and Diploma students, branches, resources, and job guidance.
       </section>
 
       <section>
@@ -91,7 +88,7 @@ export default function EngineeringRoadmap() {
           <a href="/branches">Explore Branches in Detail</a>
         </Button>
         <Button asChild variant="outline">
-          <a href="/roadmap.pdf" download>Download Roadmap PDF</a>
+          <a href="/engineering-roadmap.pdf" download>Download Roadmap PDF</a>
         </Button>
       </section>
     </div>

@@ -17,13 +17,18 @@ const exams = [
   { name: 'MAHCET', url: 'https://cetcell.mahacet.org', icon: 'https://th.bing.com/th/id/OIP.yY9x0zbdiZI-cgMKct06ggHaEK?rs=1&pid=ImgDetMain' },
   { name: 'NEET', url: 'https://neet.nta.nic.in/', icon: 'https://resize.indiatvnews.com/en/resize/newbucket/730_-/2023/04/neet-ug-2023-registration-window-neet-ug-2023-neet-nta-nic-in-2023-1681140120.jpg' },
   { name: 'SNAP', url: 'https://www.snaptest.org', icon: 'https://www.snaptest.org/mobile/img/snap.png' },
-  { name: 'KIITEE', url: 'https://kiitee.kiit.ac.in', icon: 'https://kiitee.kiit.ac.in/wp-content/uploads/2025/01/kiitee-mobile-logo.png'}
-];
+  { name: 'KIITEE', url: 'https://kiitee.kiit.ac.in', icon: 'https://kiitee.kiit.ac.in/wp-content/uploads/2025/01/kiitee-mobile-logo.png' },
 
+  // ✅ Newly Added Exams
+  { name: 'AP EAMCET', url: 'https://cets.apsche.ap.gov.in/EAPCET/', icon: 'https://cets.apsche.ap.gov.in/EAPCET/images/APEAPCET2024_JNTUK_LOGO.png' },
+  { name: 'TS EAMCET', url: 'https://eapcet.tgche.ac.in/#', icon: 'https://eapcet.tgche.ac.in/images/TG-EAPCET-Gif-2025.gif' },
+  { name: 'JEE Main', url: 'https://jeemain.nta.nic.in/', icon: 'https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2022/02/2022021375.png' },
+  { name: 'JEE Advanced', url: 'https://jeeadv.ac.in/', icon: 'https://jeeadv.ac.in/images/logo2025.png' }
+];
 
 const CompetitiveExamsCarousel = () => {
   return (
-    <section  id ="exams" className="py-16 bg-gray-100">
+    <section id="exams" className="py-16 bg-gray-100">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-indigo-700 text-center mb-10 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
           Competitive Exams

@@ -60,12 +60,12 @@ export default function Home() {
       </header>
 
       {/* Content Sections */}
-      <section id="courses">
-        <CourseSection />
-      </section>
-
       <section id="career">
         <CareerCategories />
+      </section>
+      
+      <section id="courses">
+        <CourseSection />
       </section>
 
       <section id="exams">

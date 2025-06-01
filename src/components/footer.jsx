@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GraduationCap } from 'lucide-react';
+import Blog from '../pages/Blog';
 
 const Footer = () => {
   return (

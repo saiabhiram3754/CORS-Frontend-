@@ -74,7 +74,7 @@ const CourseSection = () => {
                     .map((_, i) => (
                       <Star key={i} size={16} fill="currentColor" stroke="none" />
                     ))}
-                  <span className="ml-2 text-gray-500">(0 reviews)</span>
+                  <span className="ml-2 text-gray-500">(50 reviews)</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-800">{course.title}</h3>
                 <p className="text-gray-600">{course.subtitle}</p>
