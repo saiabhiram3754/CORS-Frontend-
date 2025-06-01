@@ -63,10 +63,10 @@ const StudentDashboard = ({ recommendations, userProfile }) => {
               </div>
             </div>
             <div className="space-x-10 hidden md:flex">
-              <a href="#courses" className="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+              {/* <a href="#courses" className="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
               <a href="#career" className="text-gray-700 hover:text-blue-600 font-medium">Career Options</a>
-              <a href="#exams" className="text-gray-700 hover:text-blue-600 font-medium">Competitive Exams</a>
-              <a href="/login" className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-4 py-1 rounded-lg">Login</a>
+              <a href="#exams" className="text-gray-700 hover:text-blue-600 font-medium">Competitive Exams</a> */}
+              <a href="/" className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-4 py-1 rounded-lg">Logout</a>
             </div>
           </div>
         </div>
