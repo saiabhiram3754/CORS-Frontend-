@@ -5,19 +5,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const exams = [
-  { name: 'CAT', url: 'https://iimcat.ac.in', icon: 'https://upload.wikimedia.org/wikipedia/commons/7/75/IIM_Calcutta_Logo.svg' },
+  { name: 'CAT', url: 'https://iimcat.ac.in', icon: 'https://iimcat.ac.in/per/g06/pub/32842/ASM/WebPortal/1/images/CAT_2024_Logo.png' },
   { name: 'GMAT', url: 'https://www.mba.com/exams/gmat', icon: 'https://www.bing.com/th/id/OIP.fha1Ar0eVDytnXnIgcjwJgAAAA?w=177&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2' },
   { name: 'GATE', url: 'https://gate2024.iisc.ac.in', icon: 'https://th.bing.com/th/id/OIP.yTUiQ0KC2klZ1oLqwfuhGAHaHa?w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2' },
   { name: 'BITSAT', url: 'https://www.bitsadmission.com', icon: 'https://th.bing.com/th/id/OIP.uODLmOtxxRtK0gHIyv11OQHaG-?w=257&h=242&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2' },
   { name: 'IIFT', url: 'https://iift.ac.in', icon: 'https://th.bing.com/th/id/OIP.2H_nhMIoL1dYg_IR4m15RwHaE8?w=306&h=204&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2' },
   { name: 'IBSAT', url: 'https://www.ibsindia.org/ibsat/', icon: 'https://www.bing.com/th/id/OIP.grTx7E8j6yH8Fau_RAB9oQHaEK?w=276&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2' },
-  { name: 'MICAT', url: 'https://www.mica.ac.in', icon: 'https://www.mica.ac.in/images/mica-logo.svg' },
-  { name: 'TISSNET', url: 'https://www.tiss.edu', icon: 'https://upload.wikimedia.org/wikipedia/en/4/4b/Tata_Institute_of_Social_Sciences_Logo.png' },
+  { name: 'MICAT', url: 'https://www.mica.ac.in', icon: 'https://bizbots.in/uploads/exams/exam_images/Biz_Events_Blogs_(29).jpg' },
+  { name: 'TISSNET', url: 'https://www.tiss.edu', icon: 'https://tiss.ac.in/uploads/images/tiss-logo_uJSyK8O.png' },
   { name: 'MAT', url: 'https://mat.aima.in', icon: 'https://in5cdn.npfs.co/uploads/template/5520/3804/publish/images/logo.jpg?1748251283' },
-  { name: 'MAHCET', url: 'https://cetcell.mahacet.org', icon: 'https://cetcell.mahacet.org/images/logo.png' },
-  { name: 'NEET', url: 'https://neet.nta.nic.in/', icon: 'https://www.bing.com/images/search?q=neet%20exam%20logo&FORM=IQFRBA&id=36E2F2E060567B28166445C454CEC5A7FDA4F084' },
-  { name: 'SNAP', url: 'https://www.snaptest.org', icon: 'https://www.snaptest.org/themes/custom/snap2020/images/snap_logo.svg' },
-  { name: 'KIITEE', url: 'https://kiitee.kiit.ac.in', icon: 'https://www.bing.com/images/search?q=kiitee%20exam%20logo&FORM=IQFRBA&id=71F1AAEC0369EA9B6769101B8A2EBBDF492CC6F7'}
+  { name: 'MAHCET', url: 'https://cetcell.mahacet.org', icon: 'https://th.bing.com/th/id/OIP.yY9x0zbdiZI-cgMKct06ggHaEK?rs=1&pid=ImgDetMain' },
+  { name: 'NEET', url: 'https://neet.nta.nic.in/', icon: 'https://resize.indiatvnews.com/en/resize/newbucket/730_-/2023/04/neet-ug-2023-registration-window-neet-ug-2023-neet-nta-nic-in-2023-1681140120.jpg' },
+  { name: 'SNAP', url: 'https://www.snaptest.org', icon: 'https://www.snaptest.org/mobile/img/snap.png' },
+  { name: 'KIITEE', url: 'https://kiitee.kiit.ac.in', icon: 'https://kiitee.kiit.ac.in/wp-content/uploads/2025/01/kiitee-mobile-logo.png'}
 ];
 
 
