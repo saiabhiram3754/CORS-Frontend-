@@ -41,87 +41,133 @@ const financialLevels = [
   "Freelancing"
 ];
 
-const SelectableGrid = ({ title, options, selected, setSelected }) => {
+const SelectableGrid = ({ title, options, selected, setSelected, allSelected }) => {
   const toggleSelect = (option) => {
-    setSelected((prev) =>
-      prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]
-    );
+    if (selected.includes(option)) {
+      setSelected(selected.filter((item) => item !== option));
+    } else if (!allSelected.includes(option)) {
+      setSelected([...selected, option]);
+    }
   };
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>
+      <h2 className="text-2xl font-bold mb-2 text-center">{title}</h2>
+      <p className="text-center text-gray-500 mb-4">Select all that apply</p>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-        {options.map((option) => (
-          <button
-            key={option}
-            className={`border rounded-lg px-4 py-2 text-center transition-all duration-150 ${
-              selected.includes(option)
-                ? 'bg-purple-500 text-white border-purple-700'
-                : 'bg-white text-black border-gray-300'
-            }`}
-            onClick={() => toggleSelect(option)}
-          >
-            {option}
-          </button>
-        ))}
+        {options.map((option) => {
+          const isDisabled = !selected.includes(option) && allSelected.includes(option);
+          return (
+            <button
+              key={option}
+              disabled={isDisabled}
+              className={`border rounded-lg px-4 py-2 text-center transition-all duration-150 ${
+                selected.includes(option)
+                  ? 'bg-purple-500 text-white border-purple-700'
+                  : isDisabled
+                  ? 'bg-gray-200 text-gray-500 border-gray-300 cursor-not-allowed'
+                  : 'bg-white text-black border-gray-300'
+              }`}
+              onClick={() => toggleSelect(option)}
+            >
+              {option}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 };
 
 export default function CareerRecommendation() {
-  const [selectedSubjects, setSelectedSubjects] = useState([]);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selectedInterests, setSelectedInterests] = useState([]);
-  const [selectedPersonality, setSelectedPersonality] = useState([]);
-  const [selectedFinance, setSelectedFinance] = useState([]);
+  const steps = [
+    { title: "What subjects are you good at?", key: "subjects", options: requiredSubjects },
+    { title: "Select your key skills", key: "skills", options: keySkills },
+    { title: "What are your interests?", key: "interests", options: interests },
+    { title: "Select your personality traits", key: "personality", options: personalityTypes },
+    { title: "Choose your financial support level", key: "finance", options: financialLevels }
+  ];
+
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [formData, setFormData] = useState({
+    subjects: [],
+    skills: [],
+    interests: [],
+    personality: [],
+    finance: []
+  });
+
+  const currentStep = steps[currentStepIndex];
+
+  const setSelected = (values) => {
+    setFormData({ ...formData, [currentStep.key]: values });
+  };
+
+  const allOtherSelected = Object.entries(formData)
+    .filter(([key]) => key !== currentStep.key)
+    .flatMap(([, values]) => values);
+
+  const goNext = () => {
+    if (formData[currentStep.key].length === 0) return;
+    if (currentStepIndex < steps.length - 1) {
+      setCurrentStepIndex(currentStepIndex + 1);
+    } else {
+      // Submit action
+      alert("Form submitted successfully!");
+      console.log("Submitted Data:", formData);
+    }
+  };
+
+  const goBack = () => {
+    if (currentStepIndex > 0) setCurrentStepIndex(currentStepIndex - 1);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-600 to-blue-500 flex flex-col items-center justify-start py-10 px-4">
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-6xl">
-        <div className="border-b-2 border-purple-200 rounded-t-2xl">
-          <div className="p-6">
-            <h1 className="text-xl font-bold text-purple-800">Career Recommendation</h1>
-            <p className="text-sm text-gray-500">Step 1 of 5</p>
-            <div className="h-1 w-full bg-purple-100 mt-2 rounded-full">
-              <div className="h-full bg-purple-500 rounded-full" style={{ width: '20%' }}></div>
-            </div>
+       <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-t-2xl px-6 py-4">
+          <div className="flex items-center space-x-2">
+            <span className="text-xl">✨</span>
+            <h1 className="text-xl font-bold">Career Recommendation</h1>
+          </div>
+          <p className="text-sm mt-1">Step {currentStepIndex + 1} of {steps.length}</p>
+          <div className="h-1 w-full bg-purple-300 mt-2 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-white transition-all duration-300"
+              style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
+            ></div>
           </div>
         </div>
         <SelectableGrid
-          title="What subjects are you good at?"
-          options={requiredSubjects}
-          selected={selectedSubjects}
-          setSelected={setSelectedSubjects}
+          title={currentStep.title}
+          options={currentStep.options}
+          selected={formData[currentStep.key]}
+          setSelected={setSelected}
+          allSelected={allOtherSelected}
         />
-        <SelectableGrid
-          title="Select your key skills"
-          options={keySkills}
-          selected={selectedSkills}
-          setSelected={setSelectedSkills}
-        />
-        <SelectableGrid
-          title="What are your interests?"
-          options={interests}
-          selected={selectedInterests}
-          setSelected={setSelectedInterests}
-        />
-        <SelectableGrid
-          title="Select your personality traits"
-          options={personalityTypes}
-          selected={selectedPersonality}
-          setSelected={setSelectedPersonality}
-        />
-        <SelectableGrid
-          title="Choose your financial support level"
-          options={financialLevels}
-          selected={selectedFinance}
-          setSelected={setSelectedFinance}
-        />
-        <div className="flex justify-end p-6">
-          <button className="bg-gradient-to-r from-purple-500 to-blue-400 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:opacity-90">
-            Next
+
+        <div className="flex justify-between p-6">
+          <button
+            onClick={goBack}
+            disabled={currentStepIndex === 0}
+            className={`px-6 py-2 rounded-lg shadow-md font-semibold transition-all duration-150 ${
+              currentStepIndex === 0
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-white text-purple-700 border border-purple-300 hover:bg-purple-100'
+            }`}
+          >
+            Previous
+          </button>
+          <button
+            onClick={goNext}
+            disabled={formData[currentStep.key].length === 0}
+            className={`px-6 py-2 rounded-lg shadow-md font-semibold transition-all duration-150 ${
+              formData[currentStep.key].length === 0
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-gradient-to-r from-purple-500 to-blue-400 text-white hover:opacity-90'
+            }`}
+          >
+            {currentStepIndex === steps.length - 1 ? "Submit" : "Next"}
           </button>
         </div>
       </div>
