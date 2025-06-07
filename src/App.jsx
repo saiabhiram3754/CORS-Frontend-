@@ -17,6 +17,7 @@ import BusinessAndManagementRoadmap from './pages/BusinessAndManagementRoadmap';
 import CareerRecommendation from './components/CareerRecommendation';
 import EducationAndTeachingRoadmap from './pages/EducationAndTeachingRoadmap';
 import Blog from './pages/Blog';
+import PrivateRoute from './components/PrivateRoute';
 
 
 const App = () => (
@@ -38,7 +39,14 @@ const App = () => (
       <Route path="/healthcare-branches" element={<HealthcareBranchesPage />} />
       <Route path="/govt-roles" element={<GovtRolesPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/recommend" element={<CareerRecommendation />} />
+      <Route
+  path="/recommend"
+  element={
+    <PrivateRoute>
+      <CareerRecommendation />
+    </PrivateRoute>
+  }
+/>
       <Route path="/blog" element={<Blog />} />
     </Routes>
   </Router>

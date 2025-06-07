@@ -88,6 +88,10 @@
 
 // export default LoginPage;
 
+
+
+
+
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 const LoginPage = () => {
@@ -104,32 +108,41 @@ const LoginPage = () => {
     }));
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    try {
-      const res = await fetch('http://localhost:8080/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials)
-      });
+  try {
+    const res = await fetch('http://localhost:8080/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
 
-      const text = await res.text();
+    const result = await res.json();
 
-      if (res.ok) {
-        alert('Login successful!');
-        // Optionally save token/session here
-        navigate('/');
+    if (res.ok) {
+      localStorage.setItem('token', result.token);
+      localStorage.setItem("userProfile", JSON.stringify({ fullName: result.fullName }));
+
+      alert('Login successful!');
+
+      const recommendations = localStorage.getItem("recommendations");
+      if (recommendations) {
+        navigate('/dashboard');
       } else {
-        alert('Login failed: ' + text);
+        navigate('/');
       }
-    } catch (err) {
-      alert('Error logging in');
-      console.error(err);
+    } else {
+      alert('Login failed: ' + result.error);
     }
-  };
+  } catch (err) {
+    alert('Error logging in');
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
@@ -138,9 +151,9 @@ const LoginPage = () => {
           <h2 className="text-2xl font-bold text-gray-800">New to CORS?</h2>
           <ul className="text-gray-600 space-y-2">
             <li>✓ One click apply using your CORS profile.</li>
-            <li>✓ Get relevant job, internship recommendations.</li>
+            {/* <li>✓ Get relevant job, internship recommendations.</li>
             <li>✓ Showcase your profile to companies.</li>
-            <li>✓ Track application status in real-time.</li>
+            <li>✓ Track application status in real-time.</li> */}
           </ul>
           <Link
             to="/register"
@@ -150,7 +163,7 @@ const LoginPage = () => {
           </Link>
           <div className="mt-6">
             <img
-              src="/illustration.svg"
+              src="/images/login.png"
               alt="Career illustration"
               className="w-full"
             />
@@ -203,4 +216,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

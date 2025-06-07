@@ -132,7 +132,7 @@ const RegisterPage = () => {
         transition={{ duration: 0.4 }}
       >
         <div className="hidden md:flex items-center justify-center bg-blue-100 p-6">
-          <img src="/assets/illustrations/career-login.svg" alt="Register" className="max-w-sm" />
+          <img src="/images/register.png" alt="Register" className="max-w-sm" />
         </div>
 
         <div className="p-8">

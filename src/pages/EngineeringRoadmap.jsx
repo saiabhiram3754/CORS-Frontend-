@@ -36,8 +36,8 @@ const roadmapSteps = [
 const branches = [
   { name: "Computer Science", description: "Programming, AI, Data Structures", image: "/images/computer-science.png" },
   { name: "Mechanical Engineering", description: "Thermodynamics, CAD, Manufacturing", image: "/images/mechanical.png" },
-  { name: "Civil Engineering", description: "Construction, Structural Design", image: "/images/civil.png" },
-  { name: "Electrical Engineering", description: "Circuits, Power Systems, Machines", image: "/images/electrical.png" },
+  { name: "Civil Engineering", description: "Construction, Structural Design", image: "/images/electrical.png" },
+  { name: "Electrical Engineering", description: "Circuits, Power Systems, Machines", image: "/images/civil.png" },
   { name: "Electronics & Communication", description: "IoT, Embedded Systems, VLSI", image: "/images/electronics.png" },
   { name: "Chemical Engineering", description: "Process Engineering, Petrochemicals", image: "/images/chemical.png" },
   { name: "Biotechnology", description: "Bioengineering, Genetic Research", image: "/images/biotechnology.png" },
