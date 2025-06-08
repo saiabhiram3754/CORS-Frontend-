@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import CareerCategories from '../components/CareerCategories';
 import CourseSection from '../components/CourseSection';
 import CompetitiveExamsPage from '../components/CompetitiveExams';
 import CarrerAnalysis from '../components/CarrerAnalysis';
 import Footer from '../components/footer';
-import { GraduationCap, Menu, X } from 'lucide-react';
+import { GraduationCap, Menu, X, ShieldCheck } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function HomePage() {
@@ -80,10 +80,19 @@ export default function HomePage() {
             </div>
 
             {/* Desktop Nav */}
-            <div className="space-x-10 hidden md:flex items-center">
+            <div className="space-x-6 hidden md:flex items-center">
               <a href="#career" className="text-gray-700 hover:text-blue-600 font-medium">Career Options</a>
               <a href="#courses" className="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
               <a href="#exams" className="text-gray-700 hover:text-blue-600 font-medium">Competitive Exams</a>
+
+              {/* Admin Button */}
+              <button
+                onClick={() => navigate('/admin')}
+                className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-3 py-1 rounded-lg hover:shadow-md transition"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                Admin
+              </button>
 
               {isLoggedIn ? (
                 <div className="relative group">
@@ -136,11 +145,7 @@ export default function HomePage() {
       <div className={`fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setMobileMenuOpen(false)} />
 
       {/* Mobile Slide-in Menu */}
-      <div
-        className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
+      <div className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <nav className="flex flex-col space-y-1 px-4 py-5">
           <button
             onClick={() => handleNavClick('Career Options')}
@@ -159,6 +164,18 @@ export default function HomePage() {
             className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
           >
             Competitive Exams
+          </button>
+
+          {/* Admin Link in Mobile */}
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              navigate('/admin');
+            }}
+            className="text-left text-yellow-600 hover:text-yellow-700 py-2 font-medium flex items-center gap-2"
+          >
+            <ShieldCheck className="w-4 h-4" />
+            Admin Panel
           </button>
 
           {isLoggedIn ? (

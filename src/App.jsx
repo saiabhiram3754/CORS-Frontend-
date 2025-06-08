@@ -22,6 +22,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import CareersPage from './pages/CarrersPage';
 import CoursesPage from './pages/CoursesPage';
 import UserPage from './pages/UserPage';
+import AboutUs from './pages/AboutUs';
 
 
 
@@ -44,6 +45,7 @@ const App = () => (
       <Route path="/healthcare-branches" element={<HealthcareBranchesPage />} />
       <Route path="/govt-roles" element={<GovtRolesPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/about" element={<AboutUs/>} />
       <Route
   path="/recommend"
   element={
