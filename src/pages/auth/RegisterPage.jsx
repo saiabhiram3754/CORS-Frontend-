@@ -85,9 +85,10 @@ import { motion } from 'framer-motion';
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
-    password: ''
+    password: '',
+    rePassword: ''
   });
 
   const handleChange = e => {
@@ -99,6 +100,11 @@ const RegisterPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    if (formData.password !== formData.rePassword) {
+      alert("Passwords do not match.");
+      return;
+    }
 
     try {
       const res = await fetch('http://localhost:8080/api/auth/register', {
@@ -142,9 +148,9 @@ const RegisterPage = () => {
           <form className="space-y-4" onSubmit={handleRegister}>
             <input
               type="text"
-              name="name"
+              name="fullName"
               placeholder="Full Name"
-              value={formData.name}
+              value={formData.fullName}
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -163,6 +169,15 @@ const RegisterPage = () => {
               name="password"
               placeholder="Password"
               value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="password"
+              name="rePassword"
+              placeholder="Confirm Password"
+              value={formData.rePassword}
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

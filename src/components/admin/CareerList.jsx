@@ -1,3 +1,6 @@
+
+
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -11,7 +14,7 @@ const CareerList = ({ onEdit, onAdd }) => {
 
   const fetchCareers = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/careers');
+      const response = await axios.get('http://localhost:8080/api/careers'); // ✅ No token needed since endpoint is public
       setCareers(response.data);
       setLoading(false);
     } catch (error) {
@@ -25,7 +28,7 @@ const CareerList = ({ onEdit, onAdd }) => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:8080/api/careers/${id}`);
+      await axios.delete(`http://localhost:8080/api/careers/${id}`); // This still works for now since no auth
       setCareers(careers.filter((career) => career.id !== id));
     } catch (error) {
       console.error('Error deleting career:', error);

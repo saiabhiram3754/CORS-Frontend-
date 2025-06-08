@@ -18,6 +18,11 @@ import CareerRecommendation from './components/CareerRecommendation';
 import EducationAndTeachingRoadmap from './pages/EducationAndTeachingRoadmap';
 import Blog from './pages/Blog';
 import PrivateRoute from './components/PrivateRoute';
+import AdminDashboard from './pages/AdminDashboard';
+import CareersPage from './pages/CarrersPage';
+import CoursesPage from './pages/CoursesPage';
+import UserPage from './pages/UserPage';
+
 
 
 const App = () => (
@@ -47,6 +52,10 @@ const App = () => (
     </PrivateRoute>
   }
 />
+    <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/careers" element={<CareersPage/>} />
+      <Route path="/admin/courses" element={<CoursesPage />} />
+       <Route path="/admin/users" element={<UserPage/>} />
       <Route path="/blog" element={<Blog />} />
     </Routes>
   </Router>

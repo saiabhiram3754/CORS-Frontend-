@@ -1,122 +1,85 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const UserForm = ({ onSubmit, onCancel, initialData }) => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+const UserForm = ({ onSubmit, initialData, onCancel }) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (initialData) {
-      setFormData({
-        fullName: initialData.fullName || "",
-        email: initialData.email || "",
-        password: "",
-        confirmPassword: "",
-      });
+      setFullName(initialData.fullName);
+      setEmail(initialData.email);
+    } else {
+      setFullName("");
+      setEmail("");
     }
   }, [initialData]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
-      alert("Please fill in all fields");
-      return;
+
+    const user = { fullName, email };
+
+    try {
+      let response;
+      if (initialData) {
+        response = await axios.put(
+          `http://localhost:8080/api/admin/users/${initialData.id}`,
+          user
+        );
+      } else {
+        response = await axios.post("http://localhost:8080/api/admin/users", user);
+      }
+      onSubmit(response.data);
+      setFullName("");
+      setEmail("");
+    } catch (error) {
+      console.error("Error saving user:", error);
+      alert("Failed to save user.");
     }
-
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    onSubmit({
-      fullName: formData.fullName,
-      email: formData.email,
-      password: formData.password,
-    });
-
-    setFormData({
-      fullName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-xl shadow-md mb-6">
-      <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+    <form onSubmit={handleSubmit} className="bg-white shadow rounded p-6 mb-6">
+      <h2 className="text-xl font-bold mb-4">
         {initialData ? "Edit User" : "Add New User"}
       </h2>
-
-      <div>
-        <label className="block font-medium">Full Name</label>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-1">Full Name</label>
         <input
           type="text"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           required
+          className="w-full px-4 py-2 border rounded"
         />
       </div>
-
-      <div>
-        <label className="block font-medium">Email</label>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-semibold mb-1">Email</label>
         <input
           type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
+          className="w-full px-4 py-2 border rounded"
         />
       </div>
-
-      <div>
-        <label className="block font-medium">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block font-medium">Re-enter Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded"
-          required
-        />
-      </div>
-
       <div className="flex space-x-2">
         <button
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          {initialData ? "Update User" : "Add User"}
+          {initialData ? "Update" : "Add"}
         </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-        >
-          Cancel
-        </button>
+        {initialData && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+          >
+            Cancel
+          </button>
+        )}
       </div>
     </form>
   );
