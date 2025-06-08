@@ -5,14 +5,15 @@ const UserList = ({ onAdd, onEdit }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch users when component mounts
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/users"); // Adjust endpoint if needed
-      setUsers(response.data);
+      const response = await axios.get("http://localhost:8080/api/users");
+      setUsers(response.data || []);
     } catch (error) {
       console.error("Error fetching users:", error);
     } finally {
@@ -21,12 +22,12 @@ const UserList = ({ onAdd, onEdit }) => {
   };
 
   const handleDelete = async (id, name) => {
-    const confirm = window.confirm(`Are you sure you want to delete user "${name}"?`);
-    if (!confirm) return;
+    const confirmed = window.confirm(`Are you sure you want to delete user "${name}"?`);
+    if (!confirmed) return;
 
     try {
       await axios.delete(`http://localhost:8080/api/users/${id}`);
-      setUsers(users.filter((user) => user.id !== id));
+      setUsers((prev) => prev.filter((user) => user.id !== id));
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -63,19 +64,19 @@ const UserList = ({ onAdd, onEdit }) => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50">
-                  <td className="border px-4 py-2">{user.fullName}</td>
-                  <td className="border px-4 py-2">{user.email}</td>
+              {users.map(({ id, fullName, email }) => (
+                <tr key={id} className="hover:bg-gray-50">
+                  <td className="border px-4 py-2">{fullName}</td>
+                  <td className="border px-4 py-2">{email}</td>
                   <td className="border px-4 py-2 text-center space-x-2">
                     <button
-                      onClick={() => onEdit(user)}
+                      onClick={() => onEdit({ id, fullName, email })}
                       className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(user.id, user.fullName)}
+                      onClick={() => handleDelete(id, fullName)}
                       className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
                     >
                       Delete

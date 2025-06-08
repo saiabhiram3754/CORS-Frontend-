@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const UserForm = ({ onSubmit, onCancel }) => {
+const UserForm = ({ onSubmit, onCancel, initialData }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -8,12 +8,28 @@ const UserForm = ({ onSubmit, onCancel }) => {
     confirmPassword: "",
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        fullName: initialData.fullName || "",
+        email: initialData.email || "",
+        password: "",
+        confirmPassword: "",
+      });
+    }
+  }, [initialData]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
+      alert("Please fill in all fields");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -25,7 +41,6 @@ const UserForm = ({ onSubmit, onCancel }) => {
       password: formData.password,
     });
 
-    // Reset form
     setFormData({
       fullName: "",
       email: "",
@@ -35,8 +50,10 @@ const UserForm = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-xl shadow-md">
-      <h2 className="text-2xl font-semibold text-blue-600 mb-2">Add New User</h2>
+    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-xl shadow-md mb-6">
+      <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+        {initialData ? "Edit User" : "Add New User"}
+      </h2>
 
       <div>
         <label className="block font-medium">Full Name</label>
@@ -91,7 +108,7 @@ const UserForm = ({ onSubmit, onCancel }) => {
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          Add User
+          {initialData ? "Update User" : "Add User"}
         </button>
         <button
           type="button"

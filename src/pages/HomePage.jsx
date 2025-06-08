@@ -294,21 +294,24 @@
 // }
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import CareerCategories from '../components/CareerCategories';
 import CourseSection from '../components/CourseSection';
 import CompetitiveExamsPage from '../components/CompetitiveExams';
 import CarrerAnalysis from '../components/CarrerAnalysis';
 import Footer from '../components/footer';
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, Menu, X, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function HomePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [initials, setInitials] = useState('');
   const [fullName, setFullName] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
+  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -324,7 +327,7 @@ export default function HomePage() {
       setInitials('');
       setFullName('');
     }
-  }, [location]); // Run whenever route/location changes (like coming back to homepage)
+  }, [location]);
 
   const handleRecommendationClick = () => {
     if (isLoggedIn) {
@@ -345,6 +348,24 @@ export default function HomePage() {
     setInitials('');
     setFullName('');
     navigate('/');
+  };
+
+  const handleNavClick = (section) => {
+    // Example placeholder function for mobile nav clicks
+    setMobileMenuOpen(false);
+    if (section === 'careers') {
+      window.location.href = '#career';
+    } else if (section === 'courses') {
+      window.location.href = '#courses';
+    } else if (section === 'user') {
+      if (isLoggedIn) {
+        navigate('/dashboard');
+      } else {
+        navigate('/login');
+      }
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -411,8 +432,66 @@ export default function HomePage() {
                 </a>
               )}
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile menu dropdown */}
+        {mobileMenuOpen && (
+          <div
+            ref={mobileMenuRef}
+            className="md:hidden bg-white shadow-lg border-t border-gray-200"
+          >
+            <nav className="flex flex-col space-y-1 px-4 py-3">
+              <button
+                onClick={() => handleNavClick(null)}
+                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => handleNavClick("careers")}
+                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
+              >
+                Careers
+              </button>
+              <button
+                onClick={() => handleNavClick("courses")}
+                className="text-left text-gray-700 hover:text-blue-600 py-2 font-medium"
+              >
+                Courses
+              </button>
+              <button
+                onClick={() => handleNavClick("user")}
+                className="text-left flex items-center gap-2 text-gray-700 hover:text-blue-600 py-2 font-medium"
+              >
+                <User className="h-5 w-5" />
+                User
+              </button>
+              <a
+                href="/logout"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-left bg-gradient-to-r from-purple-500 to-blue-600 text-white px-3 py-2 rounded font-medium mt-1"
+              >
+                Logout
+              </a>
+            </nav>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -450,8 +529,8 @@ export default function HomePage() {
         <CompetitiveExamsPage />
       </section>
 
-        <section id="exams">
-        <CarrerAnalysis/>
+      <section id="analysis">
+        <CarrerAnalysis />
       </section>
 
       <Footer />
