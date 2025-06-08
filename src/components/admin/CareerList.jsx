@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -14,7 +11,7 @@ const CareerList = ({ onEdit, onAdd }) => {
 
   const fetchCareers = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/careers'); // ✅ No token needed since endpoint is public
+      const response = await axios.get('http://localhost:8080/api/careers'); 
       setCareers(response.data);
       setLoading(false);
     } catch (error) {
@@ -67,7 +64,7 @@ const CareerList = ({ onEdit, onAdd }) => {
                 <th className="border px-4 py-2">Interests</th>
                 <th className="border px-4 py-2">Personality Types</th>
                 <th className="border px-4 py-2">Financial Levels</th>
-                <th className="border px-4 py-2 text-center">Actions</th>
+                <th className="border px-4 py-2 flex text-center ">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -90,19 +87,21 @@ const CareerList = ({ onEdit, onAdd }) => {
                   <td className="border px-4 py-2">
                     {career.financialLevels?.join(', ')}
                   </td>
-                  <td className="border px-4 py-2 text-center space-x-2">
-                    <button
-                      onClick={() => onEdit(career)}
-                      className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(career.id, career.title)}
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-                    >
-                      Delete
-                    </button>
+                  <td className="border px-4 py-2 text-center">
+                    <div className="flex justify-center space-x-2">
+                      <button
+                        onClick={() => onEdit(career)}
+                        className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(career.id, career.title)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

@@ -4,6 +4,7 @@ import CareerForm from "../components/admin/CareerForm";
 import CourseForm from "../components/admin/CourseForm";
 import CareerList from "../components/admin/CareerList";
 import UserForm from "../components/admin/UserForm";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -12,6 +13,8 @@ const AdminDashboard = () => {
   const [editCareer, setEditCareer] = useState(null);
   const [showUserForm, setShowUserForm] = useState(false);
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+
 
   // Mobile menu open state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -123,10 +126,7 @@ const AdminDashboard = () => {
               >
                 Courses
               </button>
-              <button
-                onClick={() => handleNavClick("user")}
-                className="text-gray-700 hover:text-blue-600 font-medium flex items-center gap-1"
-              >
+              <button onClick={() => navigate("/admin/users")} className="text-gray-700 hover:text-blue-600 font-medium flex items-center gap-1">
                 <User className="h-5 w-5" />
                 User
               </button>

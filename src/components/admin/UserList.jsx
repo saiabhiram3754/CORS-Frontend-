@@ -8,7 +8,7 @@ const UserList = ({ onEdit }) => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/admin/users"); // ✅ Make sure this endpoint returns all users
+      const res = await axios.get("http://localhost:8080/api/admin/users");
       setUsers(res.data);
       setLoading(false);
     } catch (err) {
@@ -65,7 +65,7 @@ const UserList = ({ onEdit }) => {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(id)} // ✅ Fixed this line
                       className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
                     >
                       Delete
