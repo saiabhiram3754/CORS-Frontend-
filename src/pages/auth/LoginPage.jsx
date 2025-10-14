@@ -112,7 +112,7 @@ const handleLogin = async (e) => {
   e.preventDefault();
 
   try {
-    const res = await fetch('http://localhost:8080/api/auth/login', {
+    const res = await fetch('https://cors-frontend-xi.vercel.app/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -216,3 +216,4 @@ const handleLogin = async (e) => {
 };
 
 export default LoginPage;
+
