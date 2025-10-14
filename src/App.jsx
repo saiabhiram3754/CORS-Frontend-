@@ -30,7 +30,7 @@ const App = () => (
   <Router>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Link to="/login">Login</Link>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/engineering-roadmap" element={<EngineeringRoadmap />} />
       <Route path="/healthcare-roadmap" element={<HealthcareRoadmap />} />
@@ -46,7 +46,8 @@ const App = () => (
       <Route path="/govt-roles" element={<GovtRolesPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/about" element={<AboutUs/>} />
-      <Route
+ <Route path="/login" element={<LoginPage />} />
+<Route
   path="/recommend"
   element={
     <PrivateRoute>
@@ -54,6 +55,7 @@ const App = () => (
     </PrivateRoute>
   }
 />
+
     <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/careers" element={<CareersPage/>} />
       <Route path="/admin/courses" element={<CoursesPage />} />
